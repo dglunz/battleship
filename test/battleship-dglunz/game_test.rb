@@ -4,18 +4,18 @@ require './lib/game'
 class GameTest < Minitest::Test
   def test_round_count
     skip
-    mastermind = Game.new
-    assert_equal 0, mastermind.count
+    battleship = Game.new
+    assert_equal 0, battleship.count
 
-    mastermind.play_round
-    assert_equal 1, mastermind.count
+    battleship.play_round
+    assert_equal 1, battleship.count
 
-    mastermind.play_round
-    assert_equal 2, mastermind.count
+    battleship.play_round
+    assert_equal 2, battleship.count
   end
 
   def test_introduction
-    mastermind = Game.new
-    
+    battleship = Game.new
+
   end
 end

@@ -2,8 +2,8 @@ Gem::Specification.new do |s|
   s.name          = 'battleship-dglunz'
   s.version       = '1.0.1'
   s.date          = '2014-08-24'
-  s.summary       = "Mastermind in your terminal!"
-  s.description   = "Classic Mastermind Game a la Ruby"
+  s.summary       = "battleship in your terminal!"
+  s.description   = "Classic battleship Game a la Ruby"
   s.authors       = ["Danny Glunz"]
   s.email         = 'dannyglunz@gmail.com'
   s.files         = %w[battleship-dglunz.gemspec

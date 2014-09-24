@@ -1,6 +1,7 @@
 require_relative 'display'
 require_relative 'color_sequence'
 require_relative 'board'
+require_relative 'player'
 
 class Game
   attr_reader :round,
@@ -9,7 +10,8 @@ class Game
               :display
 
   def initialize(display)
-    @history               = []
+    @player_1              = Player.new()
+    @player_2              = Player.new
     @round                 = 0
     @display               = display
     @final_sequence        = ColorSequence.new
@@ -63,7 +65,7 @@ class Game
 
 
   def update_board
-    display.mastermind
+    display.battleship
     @finished ? finish_board : edit_board
     board.show
   end

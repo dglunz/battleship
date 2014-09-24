@@ -1,13 +1,13 @@
-![example](https://s3-us-west-2.amazonaws.com/dglunz/mastermind-dg.gif)
+![example](https://s3-us-west-2.amazonaws.com/dglunz/battleship-dg.gif)
 
 ##Install
 
 `
-$ gem install mastermind-dglunz
+$ gem install battleship-dglunz
 `
 
 ##Play
 
 `
-$ mastermind
+$ battleship
 `

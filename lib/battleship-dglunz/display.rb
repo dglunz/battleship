@@ -7,33 +7,28 @@ module Display
     end.join("")
   end
   def self.introduction
-    mastermind
+    battleship
     printf "Welcome!\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?\n"
   end
 
   def self.instructions
-    mastermind
+    battleship
     puts "
     \n
-    A secret combination of colors has been chosen at random.\n
-    Your job is to guess the correct sequence in 10 tries or less.\n
-    If you manage to win, you'll be regarded as a mastermind.\n
-    If you lose, absolutely nothing will happen.\n
-    Other than letting down your friends and family.\n
+
     Good luck!\n\n\n\nEnter (p)lay to get started. \n\n"
   end
 
-  def self.mastermind
+  def self.battleship
     clear_screen
     puts "
 
-███╗   ███╗ █████╗ ███████╗████████╗███████╗██████╗ ███╗   ███╗██╗███╗   ██╗██████╗
-████╗ ████║██╔══██╗██╔════╝╚══██╔══╝██╔════╝██╔══██╗████╗ ████║██║████╗  ██║██╔══██╗
-██╔████╔██║███████║███████╗   ██║   █████╗  ██████╔╝██╔████╔██║██║██╔██╗ ██║██║  ██║
-██║╚██╔╝██║██╔══██║╚════██║   ██║   ██╔══╝  ██╔══██╗██║╚██╔╝██║██║██║╚██╗██║██║  ██║
-██║ ╚═╝ ██║██║  ██║███████║   ██║   ███████╗██║  ██║██║ ╚═╝ ██║██║██║ ╚████║██████╔╝
-╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝   ╚═╝   ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═════╝
-
+██████╗  █████╗ ████████╗████████╗██╗     ███████╗███████╗██╗  ██╗██╗██████╗
+██╔══██╗██╔══██╗╚══██╔══╝╚══██╔══╝██║     ██╔════╝██╔════╝██║  ██║██║██╔══██╗
+██████╔╝███████║   ██║      ██║   ██║     █████╗  ███████╗███████║██║██████╔╝
+██╔══██╗██╔══██║   ██║      ██║   ██║     ██╔══╝  ╚════██║██╔══██║██║██╔═══╝
+██████╔╝██║  ██║   ██║      ██║   ███████╗███████╗███████║██║  ██║██║██║
+╚═════╝ ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝╚═╝╚═╝
 
 "
 
@@ -64,8 +59,8 @@ module Display
   end
 
   def self.start
-    mastermind
-    puts "I have generated a beginner sequence with four elements made up of: (#{colorful('r')})ed, (#{colorful('g')})reen, (#{colorful('b')})lue, and (#{colorful('y')})ellow. Use (q)uit at any time to end the game."
+    battleship
+    puts "I have laid out my ships on the grid. Now it's your turn. The first is 2 units long and the second is 3 units long. The grid has A1 at the top left and D4 at the bottom right."
   end
 
   def self.round_result(results, turn_count)
