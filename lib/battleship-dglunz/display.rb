@@ -1,43 +1,48 @@
 require 'rainbow'
 
-module Display
-  def self.colorful(sequence)
+class Display
+  attr_reader :stdout
+  def initialize(stdout)
+    @stdout = stdout
+  end
+
+  def colorful(sequence)
     sequence.split("").map do |letter|
       color_it(letter)
     end.join("")
   end
 
-  def self.input_name
+  def input_name
     battleship_logo
-    printf "Enter Name: "
+    stdout.printf "Enter Name: "
 
   end
 
-  def self.introduction(name)
+  def introduction(name)
     battleship_logo
-    printf "Welcome #{name}!\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?\n"
+    stdout.printf "Welcome #{name}!\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?\n"
   end
 
 
-  def self.instructions
+  def instructions
     battleship_logo
-    puts "
+    stdout.puts "
     \n
 
     Good luck!\n\n\n\nEnter (p)lay to get started. \n\n"
   end
 
-  def self.add_ship(ship)
-    printf "#{ship.name} [#{ship.size}]: "
+  def add_ship(ship)
+    stdout.printf "#{ship.name} [#{ship.size}]: "
   end
 
-  def self.target_setup
-    puts "Your turn to attack! Hits are labeled #{Rainbow('H').red} while Misses are labeled #{Rainbow('M').white}"
+  def target_setup
+    stdout.puts "Your turn to attack! Hits are labeled #{Rainbow('H').red} while Misses are labeled #{Rainbow('M').white}"
   end
 
-  def self.battleship_logo
+  def battleship_logo
     clear_screen
-    puts "
+    stdout.puts "
 
 ██████╗  █████╗ ████████╗████████╗██╗     ███████╗███████╗██╗  ██╗██╗██████╗
 ██╔══██╗██╔══██╗╚══██╔══╝╚══██╔══╝██║     ██╔════╝██╔════╝██║  ██║██║██╔══██╗
@@ -50,49 +55,49 @@ module Display
 
   end
 
-   def self.clear_screen
+   def clear_screen
      print "\e[2J\e[f"
    end
 
-  def self.invalid_input(input)
-    puts "#{input} is not a valid input. Please try again."
+  def invalid_input(input)
+    stdout.puts "#{input} is not a valid input. Please try again."
   end
 
-  def self.enter
-    printf 'Enter command: '
+  def enter
+    stdout.printf 'Enter command: '
   end
 
-  def self.enter_guess
-    printf 'Enter Attack Coordinates: '
+  def enter_guess
+    stdout.printf 'Enter Attack Coordinates: '
   end
 
-  def self.loser
-    puts 'Sorry, you lose...'
+  def loser
+    stdout.puts 'Sorry, you lose...'
   end
 
-  def self.winner
-    puts 'Congrats, you win!'
+  def winner
+    stdout.puts 'Congrats, you win!'
   end
 
-  def self.hit(ship)
-    puts "You hit the enemy #{ship.name}!"
+  def hit(ship)
+    stdout.puts "You hit the enemy #{ship.name}!"
   end
 
-  def self.miss
-    puts 'You missed the enemy.'
+  def miss
+    stdout.puts 'You missed the enemy.'
   end
 
-  def self.start
+  def start
     battleship_logo
-    puts "Choose a location for each of the ships in your fleet by choosing coordinates within the Ocean Grid. For example, a ship of length 3 could be: A1 B2 C3 "
+    stdout.puts "Choose a location for each of the ships in your fleet by choosing coordinates within the Ocean Grid. For example, a ship of length 3 could be: A1 B2 C3 "
   end
 
-  def self.quit
-    puts "Quitting..."
+  def quit
+    stdout.puts "Quitting..."
   end
 
-  def self.play_again
-    puts "Play Again? (Y)es or (N)o"
+  def play_again
+    stdout.puts "Play Again? (Y)es or (N)o"
   end
 
 end

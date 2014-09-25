@@ -14,7 +14,7 @@ class CLI
   def initialize(stdin, stdout)
     @stdin    = stdin
     @stdout   = stdout
-    @display  = Display
+    @display  = Display.new(stdout)
     @check    = Check
   end
 
@@ -76,7 +76,7 @@ class CLI
 
   def play
     display.start
-    @game = Game.new(display, player_1, player_2, check, @stdin, @stdout).start
+    @game = Game.new(display, player_1, player_2, check, @stdin).start
   end
 
   def play_again?

@@ -5,7 +5,7 @@ class GameTest < Minitest::Test
     player_1 = Player.new("Dan", Fleet.new)
     player_2 = Player.new("Stan", Fleet.new)
     game = Game.new(Display, player_1, player_2, Check)
-    
+    game.get_input
     game.valid_attack_input
 
   end

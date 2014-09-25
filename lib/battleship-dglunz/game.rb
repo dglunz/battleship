@@ -8,7 +8,7 @@ class Game
               :player_2,
               :result
 
-  def initialize(display, player_1, player_2, check, stdin, stdout)
+  def initialize(display, player_1, player_2, check, stdin)
     @player_1    = player_1
     @player_2    = player_2
     @check       = check
@@ -18,7 +18,6 @@ class Game
     @coordinates = ''
     @finished    = false
     @stdin       = stdin
-    @stdout      = stdout
   end
 
   def start
