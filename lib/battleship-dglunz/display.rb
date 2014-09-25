@@ -6,10 +6,18 @@ module Display
       color_it(letter)
     end.join("")
   end
-  def self.introduction
+
+  def self.input_name
     battleship_logo
-    printf "Welcome!\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?\n"
+    printf "Enter Name: "
+
   end
+
+  def self.introduction(name)
+    battleship_logo
+    printf "Welcome #{name}!\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?\n"
+  end
+
 
   def self.instructions
     battleship_logo
@@ -21,6 +29,10 @@ module Display
 
   def self.add_ship(ship)
     printf "#{ship.name} [#{ship.size}]: "
+  end
+
+  def self.target_setup
+    puts "Your turn to attack! Hits are labeled #{Rainbow('H').red} while Misses are labeled #{Rainbow('M').white}"
   end
 
   def self.battleship_logo
@@ -51,7 +63,7 @@ module Display
   end
 
   def self.enter_guess
-    printf 'Enter Guess: '
+    printf 'Enter Attack Coordinates: '
   end
 
   def self.loser
