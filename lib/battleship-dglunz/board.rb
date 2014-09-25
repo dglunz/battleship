@@ -1,4 +1,5 @@
 require 'terminal-table'
+require 'rainbow'
 
 class Board
   attr_reader :target_rows,
@@ -53,23 +54,29 @@ class Board
   def target_hit(coordinate)
     row = coordinate[0].to_sym
     column = coordinate[1].to_i
-    @target_rows[row][column] = "H"
+    @target_rows[row][column] = Rainbow("H").red
     create_new_table
   end
 
   def target_miss(coordinate)
     row = coordinate[0].to_sym
     column = coordinate[1].to_i
-    @target_rows[row][column] = "M"
+    @target_rows[row][column] = Rainbow("M").white
     create_new_table
   end
 
-  def ocean_hit
-
+  def ocean_hit(coordinate)
+    row = coordinate[0].to_sym
+    column = coordinate[1].to_i
+    @ocean_rows[row][column] = Rainbow("H").red
+    create_new_table
   end
 
   def ocean_miss
-
+    row = coordinate[0].to_sym
+    column = coordinate[1].to_i
+    @ocean_rows[row][column] = Rainbow("M").white
+    create_new_table
   end
 
   private

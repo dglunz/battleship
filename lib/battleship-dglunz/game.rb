@@ -16,7 +16,6 @@ class Game
     @display     = display
     @board       = Board.new
     @coordinates = ''
-    @finished    = false
     @stdin       = stdin
   end
 
@@ -30,7 +29,7 @@ class Game
   def game_loop
     until finished?
       get_input
-      valid_attack_input? ? play_round : invalid_input(coordinates)
+      valid_attack_input? ? play_round : invalid_input
     end
     game_over
   end
@@ -63,14 +62,14 @@ class Game
 
   def update_board
     display.battleship_logo
-    # @finished ? finish_board : edit_board
+    # @finished ? finish_board
     board.show_both
   end
 
   def update_ship_location(ship)
     display.add_ship(ship)
     @coordinates = @stdin.gets.chomp.upcase
-    ship.location = coordinates
+    valid_ship_placement?(ship) ? (ship.location = coordinates) : update_ship_location(ship)
     board.add_ship(ship)
   end
 
@@ -105,17 +104,16 @@ class Game
     board.finished(round, history)
   end
 
-  def edit_board
-    # check if used
-    board.edit_row(round, history)
-  end
-
   def valid_attack_input?
-    expected_length?(2) && within_column_range? && within_row_range?
+    expected_length?(2) && within_bounds?
   end
 
   def expected_length?(expected)
     coordinates.length == expected
+  end
+
+  def within_bounds?
+    within_column_range? && within_row_range?
   end
 
   def within_row_range?
@@ -126,18 +124,39 @@ class Game
     coordinates[0].scan(/[^ABCD]/).length == 0
   end
 
-  def valid_ship_placement?
-    true
+  def valid_ship_placement?(ship)
+    #withinbounds only compares the first coordinate
+    valid_ship_size?(ship) && within_bounds? && !diagonal? && !overlapping?
   end
 
-  def invalid_input(input)
-    quit? ? return : display.invalid_input(input)
+  def overlapping?
+    if !player_1.fleet.ships[0].location.nil?
+      coordinates.split(" ").select do |coordinate|
+        player_1.fleet.ships[0].location.include?(coordinate)
+      end.count > 0
+    end
+  end
+
+  def valid_ship_size?(ship)
+    coordinates.split(" ").count == ship.size
+  end
+
+  def invalid_input
+    quit? ? return : display.invalid_input(coordinates)
   end
 
   def game_over
-    @finished = true
     update_board
     win? ? display.winner : display.loser
   end
 
+  def diagonal?
+    vertical = %w(A B C D)
+    horizontal = %w(1 2 3 4)
+    coordinates_a = coordinates.split(" ")
+    h = horizontal.index(coordinates_a[0][1]) - horizontal.index(coordinates_a[1][1])
+    v = vertical.index(coordinates_a[0][0]) - vertical.index(coordinates_a[1][0])
+    t = h.abs + v.abs
+    t > 1
+  end
 end
