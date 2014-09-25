@@ -1,21 +1,12 @@
 require_relative 'test_helper'
-require './lib/game'
 
 class GameTest < Minitest::Test
-  def test_round_count
-    skip
-    battleship = Game.new
-    assert_equal 0, battleship.count
-
-    battleship.play_round
-    assert_equal 1, battleship.count
-
-    battleship.play_round
-    assert_equal 2, battleship.count
-  end
-
-  def test_introduction
-    battleship = Game.new
+  def test_validate_attack
+    player_1 = Player.new("Dan", Fleet.new)
+    player_2 = Player.new("Stan", Fleet.new)
+    game = Game.new(Display, player_1, player_2, Check)
+    
+    game.valid_attack_input
 
   end
 end

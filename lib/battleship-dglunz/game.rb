@@ -1,14 +1,14 @@
 class Game
   attr_reader :round,
-              :history,
               :board,
               :display,
               :coordinates,
               :check,
               :player_1,
-              :player_2
+              :player_2,
+              :result
 
-  def initialize(display, player_1, player_2, fleet, check)
+  def initialize(display, player_1, player_2, check, stdin, stdout)
     @player_1    = player_1
     @player_2    = player_2
     @check       = check
@@ -17,6 +17,8 @@ class Game
     @board       = Board.new
     @coordinates = ''
     @finished    = false
+    @stdin       = stdin
+    @stdout      = stdout
   end
 
   def start
@@ -57,12 +59,7 @@ class Game
 
   def check_fired_shots
     @result = check.attack(player_2, coordinates)
-    if @result.length == 1
-      board.target_hit(coordinates)
-    else
-      board.target_miss(coordinates)
-    end
-
+    hit? ? board.target_hit(coordinates) : board.target_miss(coordinates)
   end
 
   def update_board
@@ -73,9 +70,13 @@ class Game
 
   def update_ship_location(ship)
     display.add_ship(ship)
-    @coordinates = gets.chomp.upcase
+    @coordinates = @stdin.gets.chomp.upcase
     ship.location = coordinates
     board.add_ship(ship)
+  end
+
+  def hit?
+    result.length == 1
   end
 
   def win?
@@ -98,7 +99,7 @@ class Game
 
   def get_input
     display.enter_guess
-    @coordinates = gets.chomp.upcase
+    @coordinates = @stdin.gets.chomp.upcase
   end
 
   def finish_board

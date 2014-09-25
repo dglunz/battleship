@@ -9,10 +9,11 @@ class CLI
               :display,
               :player_1,
               :player_2,
-              :fleet,
               :check
 
-  def initialize
+  def initialize(stdin, stdout)
+    @stdin    = stdin
+    @stdout   = stdout
     @display  = Display
     @check    = Check
   end
@@ -41,7 +42,7 @@ class CLI
 
   def create_first_player
     display.input_name
-    @input = gets.chomp
+    @input = @stdin.gets.chomp
     @player_1 = Player.new(input, Fleet.new)
   end
 
@@ -75,7 +76,7 @@ class CLI
 
   def play
     display.start
-    @game = Game.new(display, player_1, player_2, fleet, check).start
+    @game = Game.new(display, player_1, player_2, check, @stdin, @stdout).start
   end
 
   def play_again?
@@ -87,6 +88,6 @@ class CLI
   def get_input
     @input = ''
     display.enter
-    @input = gets.chomp.downcase
+    @input = @stdin.gets.chomp.downcase
   end
 end
