@@ -7,19 +7,23 @@ module Display
     end.join("")
   end
   def self.introduction
-    battleship
+    battleship_logo
     printf "Welcome!\nWould you like to (p)lay, read the (i)nstructions, or (q)uit?\n"
   end
 
   def self.instructions
-    battleship
+    battleship_logo
     puts "
     \n
 
     Good luck!\n\n\n\nEnter (p)lay to get started. \n\n"
   end
 
-  def self.battleship
+  def self.add_ship(ship)
+    printf "#{ship.name} [#{ship.size}]: "
+  end
+
+  def self.battleship_logo
     clear_screen
     puts "
 
@@ -59,10 +63,10 @@ module Display
   end
 
   def self.start
-    battleship
-    puts "I have laid out my ships on the grid. Now it's your turn. The first is 2 units long and the second is 3 units long. The grid has A1 at the top left and D4 at the bottom right."
+    battleship_logo
+    puts "Choose a location for each of the ships in your fleet by choosing coordinates within the Ocean Grid. For example, a ship of length 3 could be: A1 B2 C3 "
   end
-
+  #"I have laid out my ships on the grid. Now it's your turn. The first is 2 units long and the second is 3 units long. The grid has A1 at the top left and D4 at the bottom right."
   def self.round_result(results, turn_count)
     puts "'#{results[:guess]}' has #{results[:elements]} of the correct Elements with #{results[:positions]} in the correct Positions.\nYou've taken #{turn_count} guesses"
   end
