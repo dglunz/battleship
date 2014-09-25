@@ -74,6 +74,14 @@ module Display
     puts 'Congrats, you win!'
   end
 
+  def self.hit(ship)
+    puts "You hit the enemy #{ship.name}!"
+  end
+
+  def self.miss
+    puts 'You missed the enemy.'
+  end
+
   def self.start
     battleship_logo
     puts "Choose a location for each of the ships in your fleet by choosing coordinates within the Ocean Grid. For example, a ship of length 3 could be: A1 B2 C3 "

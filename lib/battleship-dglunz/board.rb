@@ -50,14 +50,18 @@ class Board
     puts @ocean_grid
   end
 
-  private
-
-  def target_hit
-
+  def target_hit(coordinate)
+    row = coordinate[0].to_sym
+    column = coordinate[1].to_i
+    @target_rows[row][column] = "H"
+    create_new_table
   end
 
-  def target_missed
-
+  def target_miss(coordinate)
+    row = coordinate[0].to_sym
+    column = coordinate[1].to_i
+    @target_rows[row][column] = "M"
+    create_new_table
   end
 
   def ocean_hit
@@ -67,6 +71,8 @@ class Board
   def ocean_miss
 
   end
+
+  private
 
   def fill_empty_rows(last_row=1)
     border_letters = ['A','B','C','D']

@@ -1,21 +1,22 @@
-require_relative 'ship'
 class Game
   attr_reader :round,
               :history,
               :board,
               :display,
               :coordinates,
-              :fleet
+              :check,
+              :player_1,
+              :player_2
 
-  def initialize(display, player_1, player_2, fleet)
+  def initialize(display, player_1, player_2, fleet, check)
     @player_1    = player_1
     @player_2    = player_2
+    @check       = check
     @round       = 0
     @display     = display
     @board       = Board.new
     @coordinates = ''
     @finished    = false
-    @fleet       = fleet
   end
 
   def start
@@ -41,7 +42,7 @@ class Game
   end
 
   def ocean_setup
-    fleet.each do |ship|
+    player_1.fleet.ships.each do |ship|
       update_ship_location(ship)
       display.battleship_logo
       board.show_ocean
@@ -54,10 +55,19 @@ class Game
     board.show_both
   end
 
+  def check_fired_shots
+    @result = check.attack(player_2, coordinates)
+    if @result.length == 1
+      board.target_hit(coordinates)
+    else
+      board.target_miss(coordinates)
+    end
+
+  end
+
   def update_board
     display.battleship_logo
     # @finished ? finish_board : edit_board
-    edit_board
     board.show_both
   end
 
@@ -82,8 +92,8 @@ class Game
      quit? || win?
   end
 
-  def show_round_result(round_result)
-    display.round_result(round_result, round)
+  def show_round_result
+    @result.length == 1 ? display.hit(@result.first) : display.miss
   end
 
   def get_input
