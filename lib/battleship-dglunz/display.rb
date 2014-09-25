@@ -78,10 +78,6 @@ module Display
     battleship_logo
     puts "Choose a location for each of the ships in your fleet by choosing coordinates within the Ocean Grid. For example, a ship of length 3 could be: A1 B2 C3 "
   end
-  #"I have laid out my ships on the grid. Now it's your turn. The first is 2 units long and the second is 3 units long. The grid has A1 at the top left and D4 at the bottom right."
-  def self.round_result(results, turn_count)
-    puts "'#{results[:guess]}' has #{results[:elements]} of the correct Elements with #{results[:positions]} in the correct Positions.\nYou've taken #{turn_count} guesses"
-  end
 
   def self.quit
     puts "Quitting..."
@@ -89,20 +85,6 @@ module Display
 
   def self.play_again
     puts "Play Again? (Y)es or (N)o"
-  end
-
-  private
-
-  def self.color_it(letter)
-    case letter
-      when 'r' then Rainbow(letter).red
-      when 'g' then Rainbow(letter).green
-      when 'b' then Rainbow(letter).blue
-      when 'y' then Rainbow(letter).yellow
-      when 'w' then Rainbow(letter).white
-      when 'b' then Rainbow(letter).black
-      else letter
-    end
   end
 
 end

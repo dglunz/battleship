@@ -7,7 +7,7 @@ class Game
               :coordinates,
               :fleet
 
-  def initialize(display, player_1, player_2)
+  def initialize(display, player_1, player_2, fleet)
     @player_1    = player_1
     @player_2    = player_2
     @round       = 0
@@ -15,10 +15,7 @@ class Game
     @board       = Board.new
     @coordinates = ''
     @finished    = false
-    @fleet       = [
-      patrol_boat = Ship.new("Patrol Boat", 2, "X"),
-      destroyer   = Ship.new("Destroyer", 3, "Y")
-    ]
+    @fleet       = fleet
   end
 
   def start
@@ -38,8 +35,9 @@ class Game
 
   def play_round
     @round += 1
+    check_fired_shots
     update_board
-    show_round_result(history.last)
+    show_round_result
   end
 
   def ocean_setup

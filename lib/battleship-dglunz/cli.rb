@@ -7,11 +7,17 @@ class CLI
   attr_reader :input,
               :display,
               :player_1,
-              :player_2
+              :player_2,
+              :fleet
 
   def initialize
     @display  = Display
-    @player_2 = Player.new("Bot", Board.new, [])
+    @fleet    = [
+                  patrol_boat = Ship.new("Patrol Boat", 2, "X"),
+                  destroyer   = Ship.new("Destroyer", 3, "Y")
+                ]
+    @player_2 = Player.new("Bot", fleet)
+
   end
 
   def start
@@ -38,7 +44,7 @@ class CLI
   def create_first_player
     display.input_name
     @input = gets.chomp
-    @player_1 = Player.new(input, Board.new, [])
+    @player_1 = Player.new(input, fleet)
   end
 
   def instructions
@@ -66,7 +72,7 @@ class CLI
 
   def play
     display.start
-    @game = Game.new(display, player_1, player_2).start
+    @game = Game.new(display, player_1, player_2, fleet).start
   end
 
   def play_again?
