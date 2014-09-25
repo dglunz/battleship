@@ -130,7 +130,7 @@ class Game
   end
 
   def overlapping?
-    if !player_1.fleet.ships[0].location.nil?
+    if player_1.fleet.ships[0].location.nil? == false
       coordinates.split(" ").select do |coordinate|
         player_1.fleet.ships[0].location.include?(coordinate)
       end.count > 0
