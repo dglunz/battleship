@@ -11,3 +11,4 @@ $ gem install battleship-dglunz
 `
 $ battleship
 `
+fuckme
