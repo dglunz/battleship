@@ -1,4 +1,4 @@
-![example](https://s3-us-west-2.amazonaws.com/dglunz/battleship-dg.gif)
+Still not completely finished. See [mastermind](https://github.com/dglunz/mastermind) instead.
 
 ##Install
 
